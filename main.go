@@ -418,5 +418,6 @@ func main() {
 		}
 
 		log.Donef("- Done")
+		os.Exit(0)
 	}
 }

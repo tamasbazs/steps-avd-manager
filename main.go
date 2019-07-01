@@ -395,7 +395,12 @@ func main() {
 			}
 
 			serial := currentlyStartedDeviceSerial(runningDevices, currentRunningDevices)
-
+			log.Printf("- Serial: %s", serial)
+			cmd := command.New(filepath.Join(androidHome, "platform-tools/adb"), "devices")
+			out, err := cmd.RunAndReturnTrimmedCombinedOutput()
+			if err != nil {
+				log.Printf("command failed, error: %s", err)
+			}
 			if serial != "" {
 				if err := tools.ExportEnvironmentWithEnvman("BITRISE_EMULATOR_SERIAL", serial); err != nil {
 					log.Warnf("Failed to export environment (BITRISE_EMULATOR_SERIAL), error: %s", err)

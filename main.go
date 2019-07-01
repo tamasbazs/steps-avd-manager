@@ -396,7 +396,7 @@ func main() {
 
 			serial := currentlyStartedDeviceSerial(runningDevices, currentRunningDevices)
 			log.Printf("- Serial: %s", serial)
-			cmd := command.New(filepath.Join(androidHome, "platform-tools/adb"), "devices")
+			cmd := command.New(filepath.Join(configs.AndroidHome, "platform-tools/adb"), "devices")
 			out, err := cmd.RunAndReturnTrimmedCombinedOutput()
 			if err != nil {
 				log.Printf("command failed, error: %s", err)

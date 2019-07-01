@@ -416,10 +416,7 @@ func main() {
 				failf("Failed to boot emulator device within %d seconds.", bootWaitTime)
 			}
 		}
-
+		cmd := exec.CommandContext(ctx, "sh", "-c", osCommand)
 		log.Donef("- Done")
-		var buf bytes.Buffer
-		osCommand.Stderr = io.Writer
-		osCommand.Stdout = io.Writer
 	}
 }

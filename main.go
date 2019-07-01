@@ -418,7 +418,8 @@ func main() {
 		}
 
 		log.Donef("- Done")
-		osCommand.Stderr = ""
-		osCommand.Stdout = ""
+		var buf bytes.Buffer
+		osCommand.Stderr = &buf
+		osCommand.Stdout = &buf
 	}
 }

@@ -373,8 +373,7 @@ func main() {
 		osCommand := cmd.GetCmd()
 
 		if configs.Verbose == "true" {
-			osCommand.Stderr = os.Stderr
-			osCommand.Stdout = os.Stdout
+			outStr, errStr := string(os.Stdout.Bytes()), string(os.Stderr.Bytes())
 		}
 
 		err = osCommand.Start()
@@ -416,7 +415,8 @@ func main() {
 				failf("Failed to boot emulator device within %d seconds.", bootWaitTime)
 			}
 		}
-		cmd := exec.CommandContext(ctx, "sh", "-c", osCommand)
+		log.Printf(outStr)
+		log.Error(errStr)
 		log.Donef("- Done")
 	}
 }

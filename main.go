@@ -401,6 +401,7 @@ func main() {
 			if err != nil {
 				log.Printf("command failed, error: %s", err)
 			}
+			log.Printf("- Devices: %s", out)
 			if serial != "" {
 				if err := tools.ExportEnvironmentWithEnvman("BITRISE_EMULATOR_SERIAL", serial); err != nil {
 					log.Warnf("Failed to export environment (BITRISE_EMULATOR_SERIAL), error: %s", err)

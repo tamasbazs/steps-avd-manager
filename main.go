@@ -418,6 +418,7 @@ func main() {
 		}
 
 		log.Donef("- Done")
-		os.Exit(0)
+		osCommand.Stderr = ""
+		osCommand.Stdout = ""
 	}
 }

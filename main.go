@@ -407,7 +407,7 @@ func main() {
 					log.Warnf("Failed to export environment (BITRISE_EMULATOR_SERIAL), error: %s", err)
 				}
 				log.Printf("- Device with serial: %s started", serial)
-				osCommand.Exit(0)
+
 				break
 			}
 
@@ -418,5 +418,6 @@ func main() {
 			}
 		}
 		log.Donef("- Done")
+		os.Exit(0)
 	}
 }

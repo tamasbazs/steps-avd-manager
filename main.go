@@ -373,7 +373,8 @@ func main() {
 		osCommand := cmd.GetCmd()
 
 		if configs.Verbose == "true" {
-			outStr, errStr := string(os.Stdout), string(os.Stderr)
+			osCommand.Stderr = os.Stderr
+			osCommand.Stdout = os.Stdout
 		}
 
 		err = osCommand.Start()
@@ -406,6 +407,7 @@ func main() {
 					log.Warnf("Failed to export environment (BITRISE_EMULATOR_SERIAL), error: %s", err)
 				}
 				log.Printf("- Device with serial: %s started", serial)
+				osCommand.Exit(0)
 				break
 			}
 

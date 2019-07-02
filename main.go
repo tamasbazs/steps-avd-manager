@@ -417,8 +417,6 @@ func main() {
 				failf("Failed to boot emulator device within %d seconds.", bootWaitTime)
 			}
 		}
-		log.Printf(outStr)
-		log.Error(errStr)
 		log.Donef("- Done")
 	}
 }

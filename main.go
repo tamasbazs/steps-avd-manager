@@ -226,6 +226,8 @@ func main() {
 		log.Infof("Log file folder set to (%s)", outputPath)
 	}
 
+	fmt.Println()
+	
 	// update ensure the new sdkmanager, avdmanager
 	{
 		requiredSDKPackages := []string{"tools", "platform-tools", fmt.Sprintf("system-images;android-%s;%s;%s", configs.Version, configs.Tag, configs.Abi)}
@@ -449,6 +451,5 @@ func main() {
 			}
 		}
 		log.Donef("- Done")
-		os.Exit(0)
 	}
 }

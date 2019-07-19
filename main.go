@@ -218,7 +218,8 @@ func main() {
 	fmt.Println()
 	
 	outputPath := os.Getenv("BITRISE_DEPLOY_DIR")
-	if err := pathutil.IsPathExists(outputPath); err != nil {
+	exist, err := pathutil.IsPathExists(outputPath)
+	if err != nil {
 		log.Infof("Failed to check if path (%s) exist, error: %s, using current path", outputPath, err)
 		outputPath = "./"
 	}

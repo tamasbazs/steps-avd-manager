@@ -393,7 +393,7 @@ func main() {
 
 		if configs.Verbose == "true" {
 
-			osCommand.Stderr = os.Stderr
+			osCommand.Stdout = os.Stdout
 			fileOutput, err := os.Create(filepath.Join(outputPath, "./outputLogs.txt"))
 	    		if err != nil {
 				failf("Couldn't create a standard output file")
@@ -401,13 +401,13 @@ func main() {
     			defer fileOutput.Close()
 	    		osCommand.Stdout = fileOutput
 			
-			osCommand.Stderr = os.Stdout
+			osCommand.Stderr = os.Stderr
 			fileErrorOutput, err := os.Create(filepath.Join(outputPath, "./errorLogs.txt"))
 	    		if err != nil {
 				failf("Couldn't create a error output file")
     			}
     			defer fileErrorOutput.Close()
-	    		osCommand.Stdout = fileErrorOutput
+	    		osCommand.Stderr = fileErrorOutput
 		}
 
 		err = osCommand.Start()

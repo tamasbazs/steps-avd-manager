@@ -222,6 +222,8 @@ func main() {
 	if err != nil {
 		log.Infof("Failed to check if path (%s) exist, error: %s, using current path", outputPath, err)
 		outputPath = "./"
+	} else if exist {
+		log.Infof("Log file folder set to (%s)", outputPath)
 	}
 
 	// update ensure the new sdkmanager, avdmanager

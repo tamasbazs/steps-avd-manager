@@ -218,9 +218,9 @@ func main() {
 	fmt.Println()
 	
 	outputPath := os.Getenv("BITRISE_DEPLOY_DIR")
-	if exist, err := pathutil.IsPathExists(outputPath); err != nil {
+	if err := pathutil.IsPathExists(outputPath); err != nil {
 		log.Infof("Failed to check if path (%s) exist, error: %s, using current path", outputPath, err)
-		outputPath := "./"
+		outputPath = "./"
 	}
 
 	// update ensure the new sdkmanager, avdmanager

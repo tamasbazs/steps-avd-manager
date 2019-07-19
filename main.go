@@ -216,6 +216,12 @@ func main() {
 	}
 
 	fmt.Println()
+	
+	outputPath := os.Getenv("BITRISE_DEPLOY_DIR")
+	if exist, err := pathutil.IsPathExists(outputPath); err != nil {
+		log.Infof("Failed to check if path (%s) exist, error: %s, using current path", outputPath, err)
+		outputPath := "./"
+	}
 
 	// update ensure the new sdkmanager, avdmanager
 	{
@@ -373,8 +379,22 @@ func main() {
 		osCommand := cmd.GetCmd()
 
 		if configs.Verbose == "true" {
+
 			osCommand.Stderr = os.Stderr
-			osCommand.Stdout = os.Stdout
+			fileOutput, err := os.Create(filepath.Join(outputPath, "./outputLogs.txt"))
+	    		if err != nil {
+				failf("Couldn't create a standard output file")
+    			}
+    			defer fileOutput.Close()
+	    		osCommand.Stdout = fileOutput
+			
+			osCommand.Stderr = os.Stdout
+			fileErrorOutput, err := os.Create(filepath.Join(outputPath, "./errorLogs.txt"))
+	    		if err != nil {
+				failf("Couldn't create a error output file")
+    			}
+    			defer fileErrorOutput.Close()
+	    		osCommand.Stdout = fileErrorOutput
 		}
 
 		err = osCommand.Start()
